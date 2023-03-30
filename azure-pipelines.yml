@@ -12,8 +12,17 @@ steps:
   displayName: Build with Maven
   inputs:
     mavenPomFile: 'app/pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
+- task: Veracode@3
+  inputs:
+    ConnectionDetailsSelection: 'Credentials'
+    apiId: 'ea582ecd22a4414925512d647d4981eb'
+    apiKey: '78c8537db9fc19ee78dd4ca2970c6c3c8408b3f1d88180d1c4360fce1744f8239361a51604de917a8cdef8d5d6627e528c047debd49fe2a9467f0a409b4b7980'
+    veracodeAppProfile: '$(system.teamProject)'
+    version: '$(build.buildNumber)'
+    filepath: '$(build.artifactstagingdirectory)'
+    importResults: true
+    failBuildOnPolicyFail: true
+    maximumWaitTime: '360'    javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
